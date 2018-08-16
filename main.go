@@ -59,7 +59,10 @@ func messages(db *bolt.DB, bucket string) ([]string, error) {
 			s = append(s, string(decoded))
 			return nil
 		})
-		return nil
+		if err != nil {
+			fmt.Println("error iterating over messages:", err)
+			return err
+		}
 	})
 	if err != nil {
 		fmt.Printf("viewing bucket failed: %s\n:", err)
@@ -151,10 +154,12 @@ func main() {
 			messages, err := tx.CreateBucketIfNotExists([]byte(bucket))
 			if err != nil {
 				log.Printf("create bucket: %s", err)
+				return err
 			}
 			id, err := messages.NextSequence()
 			if err != nil {
 				log.Printf("finding next sequence: %s", err)
+				return err
 			}
 			err = messages.Put(itob(id), []byte(b64))
 			return err
