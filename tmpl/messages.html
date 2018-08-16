@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>fuck the police</title>
+		<style type="text/css">
+body {
+	width: 75em;
+	margin: 0 auto;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	word-wrap: break-word
+}
+		.right {
+			position: fixed;
+			max-width: 500px;
+			bottom: 0;
+			z-index: -1;
+			right: 0;
+			opacity: 0.25;
+		}
+
+
+		</style>
+	</head>
+	<body>
+		{{ range $key, $value := . }}
+		<p>{{ $value }}</p>
+		{{ end }}
+		<img class="right" src="../img/anime.jpg" />
+	</body>
+</html>
